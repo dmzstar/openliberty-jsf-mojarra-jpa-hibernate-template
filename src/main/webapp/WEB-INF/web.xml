@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+
+	<display-name>openliberty-jsf-mojarra-jpa-hibernate-template</display-name>
+
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>admin</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>org.omnifaces.FACES_VIEWS_SCAN_PATHS</param-name>
+		<param-value>/faces-views/default/*.xhtml,/faces-views/usr/*.xhtml,/WEB-INF/faces-views</param-value>
+	</context-param>
+
+	<welcome-file-list>
+		<welcome-file>index</welcome-file>
+	</welcome-file-list>
+
+	<persistence-context-ref>
+		<persistence-context-ref-name>jdbc/h2test</persistence-context-ref-name>
+		<persistence-unit-name>test</persistence-unit-name>
+	</persistence-context-ref>
+
+</web-app>

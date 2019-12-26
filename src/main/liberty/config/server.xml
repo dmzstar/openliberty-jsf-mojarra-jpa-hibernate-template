@@ -1,0 +1,60 @@
+<server description="Sample Liberty server">
+	<featureManager>
+
+
+		<feature>websocket-1.1</feature>
+		<feature>cdi-2.0</feature>
+		<feature>beanValidation-2.0</feature>
+		<feature>bells-1.0</feature>
+		<feature>jpaContainer-2.2</feature>
+		<feature>jsfContainer-2.3</feature>
+		
+
+	</featureManager>
+
+	<!-- Making a 'bell' for the library will register any META-INF/services 
+		in the referenced library with the Liberty runtime -->
+	<bell libraryRef="hibernate"/>
+	
+
+
+	<!-- Include all of the hibernate jars in a shared lib -->
+	<library id="hibernate">
+		<fileset dir="${server.config.dir}/hibernate/"
+			includes="*.jar" />
+	</library>
+
+	<library id="H2JDBCLib">
+		<fileset dir="${server.config.dir}/jdbc/"
+			includes="h2-1.4.200.jar" />
+	</library>
+
+	<dataSource id="h2test" jndiName="jdbc/h2test">
+		<!-- Define the DataSource class names on the <jdbcDriver> element -->
+		<jdbcDriver
+			javax.sql.XADataSource="org.h2.jdbcx.JdbcDataSource"
+			javax.sql.ConnectionPoolDataSource="org.h2.jdbcx.JdbcDataSource"
+			javax.sql.DataSource="org.h2.jdbcx.JdbcDataSource"
+			libraryRef="H2JDBCLib" />
+		<!-- set the connection URL on the <properties> element. this corresponds 
+			to the setURL() method on H2's JdbcDataSource class. you may also list any 
+			properties here that have a corresponding setXXX method on H2's JdbcDataSource 
+			class -->
+		<properties URL="jdbc:h2:mem:test" user="sa" password=""/>
+	</dataSource>
+	
+<!-- 	<jpa defaultPersistenceProvider="org.hibernate.jpa.HibernatePersistenceProvider"/> -->
+
+	<variable name="default.http.port" defaultValue="9000" />
+	<variable name="default.https.port" defaultValue="9443" />
+
+	<webApplication location="openliberty-jsf-mojarra-jpa-hibernate-template.war"
+		contextRoot="/">
+		<classloader commonLibraryRef="hibernate" />
+	</webApplication>
+	<mpMetrics authentication="false" />
+
+	<httpEndpoint host="*" httpPort="${default.http.port}"
+		httpsPort="${default.https.port}" id="defaultHttpEndpoint" />
+
+</server>
