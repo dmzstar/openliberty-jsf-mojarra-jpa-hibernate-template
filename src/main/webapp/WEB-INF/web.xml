@@ -16,13 +16,13 @@
 		<param-value>admin</param-value>
 	</context-param>
 
-	<context-param>
-		<param-name>org.omnifaces.FACES_VIEWS_SCAN_PATHS</param-name>
-		<param-value>/faces-views/default/*.xhtml,/faces-views/usr/*.xhtml,/WEB-INF/faces-views</param-value>
-	</context-param>
+<!-- 	<context-param> -->
+<!-- 		<param-name>org.omnifaces.FACES_VIEWS_SCAN_PATHS</param-name> -->
+<!-- 		<param-value>/faces-views/default/*.xhtml,/faces-views/usr/*.xhtml,/WEB-INF/faces-views</param-value> -->
+<!-- 	</context-param> -->
 
 	<welcome-file-list>
-		<welcome-file>index</welcome-file>
+		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<persistence-context-ref>
